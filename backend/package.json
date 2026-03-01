@@ -10,6 +10,7 @@
     "typeorm:prod": "typeorm -d dist/database/data-source.js",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:run:prod": "npm run typeorm:prod -- migration:run",
+    "schema:sync:prod": "npm run typeorm:prod -- schema:sync",
     "migration:revert": "npm run typeorm -- migration:revert",
     "migration:generate": "npm run typeorm -- migration:generate src/migrations/Auto"
   },
