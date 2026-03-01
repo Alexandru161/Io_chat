@@ -2,12 +2,18 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class AddAuditLogsAndTimestamps20260301093000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`ALTER TABLE "users" ADD COLUMN "createdAt" timestamptz NOT NULL DEFAULT now()`);
-    await queryRunner.query(`ALTER TABLE "rooms" ADD COLUMN "createdAt" timestamptz NOT NULL DEFAULT now()`);
-    await queryRunner.query(`ALTER TABLE "messages" ADD COLUMN "createdAt" timestamptz NOT NULL DEFAULT now()`);
+    await queryRunner.query(
+      `ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "createdAt" timestamptz NOT NULL DEFAULT now()`
+    );
+    await queryRunner.query(
+      `ALTER TABLE "rooms" ADD COLUMN IF NOT EXISTS "createdAt" timestamptz NOT NULL DEFAULT now()`
+    );
+    await queryRunner.query(
+      `ALTER TABLE "messages" ADD COLUMN IF NOT EXISTS "createdAt" timestamptz NOT NULL DEFAULT now()`
+    );
 
     await queryRunner.query(`
-      CREATE TABLE "audit_logs" (
+      CREATE TABLE IF NOT EXISTS "audit_logs" (
         "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
         "actorId" uuid,
         "actorUsername" varchar,
