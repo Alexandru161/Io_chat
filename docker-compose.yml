@@ -48,7 +48,7 @@ services:
     container_name: rtchat-postgres
     environment:
       - POSTGRES_USER=rtchat
-      - POSTGRES_PASSWORD=rtchat_password
+      - POSTGRES_PASSWORD=word
       - POSTGRES_DB=rtchat
     ports:
       - "5433:5432"
