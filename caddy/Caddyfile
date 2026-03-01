@@ -1,7 +1,3 @@
-{
-  auto_https prefer_wildcard
-}
-
 (app) {
   header {
     X-Content-Type-Options "nosniff"
